@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <body>
+            <form class="grid" action = '/result' method='POST'>
+                <center>
+                    {% if out %}
+                        <h3 style = "color: blue;">{{out}}</h3>
+                    {% endif %}
+                </center>
+                <label for = "WORD"> ENTER THE WORD </label>
+                <input type = 'text' name="word" id="word">
+                <center><input type='Submit' class = "file_submit'></center>
+            </form>
+        </body>
+    </head>
+</html>

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spellcheck-api
+  labels:
+    app: spellcheck-api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: spellcheck-api
+  template: 
+    metadata:
+      labels: 
+        app: spellcheck-api
+    spec:
+      containers:
+        - name: spellcheck-api
+          image: rootnsk/spellcheck:latest
+          ports:
+            - containerPort: 5000
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: spellcheck-api-loadbalancer-service
+  labels:
+    app: spellcheck-api
+spec:
+  type: LoadBalancer #ClusterIP, #NodePort
+  selector:
+    app: spellcheck-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
